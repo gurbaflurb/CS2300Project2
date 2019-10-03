@@ -64,18 +64,18 @@ This function takes in a known point(px py), and  a point to test (x and y) and 
 */
 bool checkPoint(int px, int py, int x, int y, int v1, int v2)
 {
-    if(v2 == 0)
+    if(v1 == 0)
     {
-        if(x == v2)
+        if(px == x)
         {
             return true;
-        }
+        }  
     }
     else
     {
-        float slope = v1/v2;
-        float b = py - (slope * px);
-        if(0 == (slope*x)+b-y)
+        double slope = float(v2)/float(v1);
+        int b = py - (slope * px);
+        if(0 == (slope*x)+b-y || (slope*x)+b-y < 0.0001 && (slope*x)+b-y > -0.0001)
         {
             return true;
         }
@@ -129,14 +129,14 @@ void printBoard(int llx, int lly, int d, int p1, int p2, int v1, int v2)
         }
         std::cout << std::endl;
     }
-    if(v2 == 0)
+    if(v1 == 0)
     {
-        std::cout << "Implicit Form: y="<<v1<<'/'<<v2<<"x+0"<< std::endl;
+        std::cout << "Implicit Form: y="<<v2<<'/'<<v1<<"x+0"<< std::endl;
     }
     else
     {
-        float b = p2 - (v1/v2 * p1);
-        std::cout << "Implicit Form: y="<<v1<<'/'<<v2<<"x+"<< b<< std::endl;
+        float b = p2 - (float(v2)/float(v1) * p1);
+        std::cout << "Implicit Form: y="<<v2<<'/'<<v1<<"x+"<<b<< std::endl;
     }
 }
 
